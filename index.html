@@ -8,13 +8,16 @@
 <style>
 body {
     margin: 0;
-    padding: 10px;
+    padding: 10px 10px 100px 10px; /* Aumentado o padding inferior para o rodapé fixo */
     font-family: Arial, sans-serif;
     color: #fff;
     background:
         linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
         url("fundo.png") no-repeat center center fixed;
     background-size: cover;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
 }
 
 h1 {
@@ -76,34 +79,12 @@ h1 {
     font-size: 13px;
 }
 
-.total {
-    text-align: center;
-    font-size: 22px;
-    color: #00ff99;
-    margin: 15px 0;
-}
-
-.clear {
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    background: #ff4444;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.clear:hover {
-    background: #ff6666;
-}
-
 .info-box {
     background: rgba(0,0,0,0.7);
     border: 1px solid #c46cff;
     border-radius: 8px;
     padding: 8px;
-    margin: 10px 0;
+    margin: 10px 0 80px 0; /* Aumentada a margem inferior para não ficar atrás do rodapé */
     font-size: 12px;
 }
 
@@ -116,6 +97,45 @@ h1 {
 
 input[type=range] {
     width: 100%;
+}
+
+/* Estilos para o rodapé fixo */
+.footer-fixo {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
+    border-top: 2px solid #c46cff;
+    padding: 15px;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+}
+
+.footer-fixo .total {
+    text-align: center;
+    font-size: 24px;
+    color: #00ff99;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.footer-fixo .clear {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background: #ff4444;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.footer-fixo .clear:hover {
+    background: #ff6666;
 }
 </style>
 </head>
@@ -281,9 +301,11 @@ input[type=range] {
   <p>• Acima de 3 km → R$ 1.500</p>
 </div>
 
-<div class="total" id="total">R$ 0,00</div>
-
-<button class="clear" onclick="limpar()">🧹 Limpar Orçamento</button>
+<!-- Rodapé fixo -->
+<div class="footer-fixo">
+  <div class="total" id="total">R$ 0,00</div>
+  <button class="clear" onclick="limpar()">🧹 Limpar Orçamento</button>
+</div>
 
 <script>
 let valorDeslocamento = 0;
